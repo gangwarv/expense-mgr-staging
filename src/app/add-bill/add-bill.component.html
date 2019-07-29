@@ -1,61 +1,110 @@
-<form [formGroup]="billForm" novalidate (ngSubmit)="onSubmit()" *ngIf="bills$ | async as bills">
-    <mat-card class="shipping-card">
-        <mat-card-header>
-            <mat-card-title>Expense Details</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <div class="row">
-                <div class="col" *ngIf="items$ | async as items">
-                    <!-- {{items.items | json}} -->
-                    <mat-form-field class="full-width">
-                        <mat-select placeholder="Item" formControlName="itemId">
-                            <mat-option *ngFor="let item of items.items" [value]="item.id">
-                                {{ item.name }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="billForm.controls['itemId'].hasError('required')">
-                            item is <strong>required</strong>
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col">
-                    <mat-form-field class="full-width">
-                        <input matInput placeholder="Amount" formControlName="amount">
-                        <mat-error *ngIf="billForm.controls['amount'].hasError('required')">
-                            Amount is <strong>required</strong>
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <mat-form-field class="full-width">
-                        <input matInput placeholder="Description (Quantity etc.)" formControlName="quantity">
-                        <mat-error *ngIf="billForm.controls['quantity'].hasError('required')">
-                            Quantity is <strong>required</strong>
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="row">
-                    <div class="col">
-                        <mat-form-field class="full-width">
-                            <input matInput [matDatepicker]="picker" formControlName="billDate" placeholder="Date">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                            <mat-error *ngIf="billForm.controls['billDate'].hasError('required')">
-                                    Bill Date is <strong>required</strong>
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-        </mat-card-content>
-        <mat-card-actions>
-            <button *ngIf="!bills.loading" mat-raised-button [disabled]="billForm.invalid" color="primary" type="submit">Submit <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon></button>
-            <mat-spinner *ngIf="bills.loading"></mat-spinner>
-            <pre>
+<form
+  [formGroup]="billForm"
+  novalidate
+  (ngSubmit)="onSubmit()"
+  *ngIf="bills$ | async as bills"
+>
+  <mat-card >
+    <mat-card-header>
+      <mat-card-title>Expense Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="1%"
+        fxLayoutAlign="center"
+      >
+        <div class="grey" fxFlex="50%">
+          <mat-form-field>
+            <mat-select placeholder="Item" formControlName="itemId">
+              <ng-container *ngIf="items$ | async as items">
+                <mat-option *ngFor="let item of items.items" [value]="item.id">
+                  {{ item.name }}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="billForm.controls['itemId'].hasError('required')">
+              item is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="red" fxFlex="50%">
+          <mat-form-field>
+            <input matInput placeholder="Amount" formControlName="amount" />
+            <mat-error *ngIf="billForm.controls['amount'].hasError('required')">
+              Amount is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="1%"
+        fxLayoutAlign="center"
+      >
+        <div class="yellow" fxFlex="100%">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Description (Quantity etc.)"
+              formControlName="quantity"
+            />
+            <mat-error
+              *ngIf="billForm.controls['quantity'].hasError('required')"
+            >
+              Quantity is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="1%"
+        fxLayoutAlign="center"
+      >
+        <div class="yellow" fxFlex="100%">
+          <mat-form-field>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              formControlName="billDate"
+              placeholder="Date"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error
+              *ngIf="billForm.controls['billDate'].hasError('required')"
+            >
+              Bill Date is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        *ngIf="!bills.loading"
+        mat-raised-button
+        [disabled]="billForm.invalid"
+        color="primary"
+        type="submit"
+      >
+        Submit
+        <mat-icon aria-hidden="false" aria-label="Example home icon"
+          >home</mat-icon
+        >
+      </button>
+      <mat-spinner *ngIf="bills.loading"></mat-spinner>
+      <pre>
                 {{ bills | json }}
-            </pre>
-        </mat-card-actions>
-    </mat-card>
+            </pre
+      >
+    </mat-card-actions>
+  </mat-card>
 </form>

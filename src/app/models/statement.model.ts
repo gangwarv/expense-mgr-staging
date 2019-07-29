@@ -3,9 +3,9 @@ export interface Statement {
     totalUser: number;
     budgetPerUser: number;
     fromPrevBill: number;
-    currentSpent: number;
+    currentBill: number;
     toNextBill: number;
-    startDate: Date;
+    startDate: string;
     endDate: Date;
     processed: boolean;
 }

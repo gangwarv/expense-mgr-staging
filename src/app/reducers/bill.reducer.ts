@@ -24,14 +24,14 @@ const defaultState: BillState = {
     ],
     statements: [
         {
-            id: '201907',
+            id: '201905',
             totalUser: 2,
             budgetPerUser: 6000,
             fromPrevBill: 1000,
-            currentSpent: 12100,
-            toNextBill: 900,
+            currentBill: 11000,
+            toNextBill: -1000,
             endDate: new Date(),
-            startDate: new Date(),
+            startDate: new Date().toISOString(),
             processed: false
         }
     ],

@@ -1,6 +1,38 @@
-<p>home works!</p>
-
-<ul *ngIf="items$ | async as items">
-    <li *ngFor="let item of items.items">{{ item.itemName+', Price = '+item.price }}</li>
-</ul>
-<h2 *ngIf="items$ | async as items">{{ items.loading? 'loading...':'' }}</h2>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Home</mat-card-title>
+  </mat-card-header>
+  <mat-card-content fxLayout="column">
+     <pre>
+      {{ statements$ | async | json}}
+     </pre>
+    <div
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="10px"
+      fxLayoutAlign="center"
+    >
+      <div fxFlex="100%">
+        <mat-form-field>
+          <mat-select placeholder="Period" [(ngModel)]="period">
+            <ng-container *ngIf="statements$ | async as statements">
+              <mat-option *ngFor="let statement of statements" [value]="statement.id">
+                {{ statement.id }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="10px"
+      fxLayoutAlign="center"
+    >
+      <div fxFlex="100%">
+        
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
