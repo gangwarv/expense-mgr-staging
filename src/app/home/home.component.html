@@ -1,0 +1,6 @@
+<p>home works!</p>
+
+<ul *ngIf="items$ | async as items">
+    <li *ngFor="let item of items.items">{{ item.itemName+', Price = '+item.price }}</li>
+</ul>
+<h2 *ngIf="items$ | async as items">{{ items.loading? 'loading...':'' }}</h2>
