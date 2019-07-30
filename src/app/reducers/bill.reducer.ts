@@ -3,37 +3,37 @@ import { BillState } from '../state/bill.state';
 
 const defaultState: BillState = {
     items: [
-        {
-            id: '10',
-            amount: 22,
-            billDate: new Date(),
-            createdAt: new Date(),
-            description: '',
-            itemId: '1',
-            itemName: 'Milk'
-        },
-        {
-            id: '20',
-            amount: 30,
-            billDate: new Date(),
-            createdAt: new Date(),
-            description: '',
-            itemId: '2',
-            itemName: 'Bread'
-        }
+        // {
+        //     id: '10',
+        //     amount: 22,
+        //     billDate: new Date(),
+        //     createdAt: new Date(),
+        //     description: '',
+        //     itemId: '1',
+        //     itemName: 'Milk'
+        // },
+        // {
+        //     id: '20',
+        //     amount: 30,
+        //     billDate: new Date(),
+        //     createdAt: new Date(),
+        //     description: '',
+        //     itemId: '2',
+        //     itemName: 'Bread'
+        // }
     ],
     statements: [
-        {
-            id: '201905',
-            totalUser: 2,
-            budgetPerUser: 6000,
-            fromPrevBill: 1000,
-            currentBill: 11000,
-            toNextBill: -1000,
-            endDate: new Date(),
-            startDate: new Date().toISOString(),
-            processed: false
-        }
+        // {
+        //     id: '201905',
+        //     totalUser: 2,
+        //     budgetPerUser: 6000,
+        //     fromPrevBill: 1000,
+        //     currentBill: 11000,
+        //     toNextBill: -1000,
+        //     endDate: new Date(),
+        //     startDate: new Date().toISOString(),
+        //     processed: false
+        // }
     ],
     loading: false
 }

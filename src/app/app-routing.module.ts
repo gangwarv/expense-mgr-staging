@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-// import { CreateComponent } from './create/create.component';
+import { AuthGuard } from './auth/auth.guard';
 import { AddBillComponent } from './add-bill/add-bill.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path:'home',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path:'test',
@@ -16,7 +16,8 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    component: AddBillComponent
+    component: AddBillComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'',
@@ -27,6 +28,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+
+exports: [RouterModule]
 })
 export class AppRoutingModule { }

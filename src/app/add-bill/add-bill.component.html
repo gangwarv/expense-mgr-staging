@@ -31,7 +31,7 @@
         </div>
         <div class="red" fxFlex="50%">
           <mat-form-field>
-            <input matInput placeholder="Amount" formControlName="amount" />
+            <input matInput placeholder="Amount" formControlName="amount" type="number" />
             <mat-error *ngIf="billForm.controls['amount'].hasError('required')">
               Amount is <strong>required</strong>
             </mat-error>

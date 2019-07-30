@@ -23,6 +23,9 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 import { AddBillComponent } from './add-bill/add-bill.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BillsEffect } from './effects/bill.effect';
+import { userReducer } from './reducers/user.reducer';
+import { UserEffects } from './effects/user.effect';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -37,13 +40,16 @@ import { BillsEffect } from './effects/bill.effect';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     StoreModule.forRoot({
       items: itemReducer,
-      bills: billReducer
+      bills: billReducer,
+      auth: userReducer
     }),
     EffectsModule.forRoot([
       itemEffects,
-      BillsEffect
+      BillsEffect,
+      UserEffects
     ]),
     StoreDevtoolsModule.instrument({}),
     MaterialModule,

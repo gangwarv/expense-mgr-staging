@@ -33,7 +33,7 @@ export class AddBillComponent implements OnInit {
   }
 
   onSubmit() {
-    this.store.dispatch(new AddBill(this.billForm.value));
+    this.store.dispatch(new AddBill({...this.billForm.value, monthId:'201907'}));
     // this.store.dispatch(new AddBillSuccess(this.billForm.value));
     console.log(this.billForm.value);
   }

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Effect, Actions, ofType } from "@ngrx/effects";
 import { AngularFirestore } from "@angular/fire/firestore";
 
-import { Observable, of } from "rxjs";
+import { Observable, of, from } from "rxjs";
 import { map, delay, tap, mergeMap, switchMap } from "rxjs/operators";
 
 import { Bill } from "../models/bill.model";
@@ -27,11 +27,14 @@ export class BillsEffect {
   );
 
   @Effect()
-  addPost: Observable<BillActions.All> = this.actions.pipe(
+  addBill: Observable<BillActions.All> = this.actions.pipe(
     ofType(BillActions.ADD_BILL),
     map((action: BillActions.AddBill) => action.payload),
-    switchMap((payload: Bill) => of(payload)),
-    delay(2000),
+    switchMap((bill: Bill) => from(this.db.collection('expenses').add(bill))),
+    map(docRef=> docRef.get()),
+    switchMap(docSnap=> from(docSnap)),
+    map(snap=>snap.data()),
+    tap(snap1=>console.log('returned snap', snap1)),
     map((bill: Bill) => new BillActions.AddBillSuccess(bill))
   );
 }

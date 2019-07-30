@@ -9,7 +9,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgModule } from '@angular/core';
-import { MatNativeDateModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatNativeDateModule, MatProgressSpinnerModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
     imports:[
@@ -23,7 +24,10 @@ import { MatNativeDateModule, MatProgressSpinnerModule } from '@angular/material
         MatSelectModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule
     ],
     exports:[
         MatToolbarModule,
@@ -36,8 +40,10 @@ import { MatNativeDateModule, MatProgressSpinnerModule } from '@angular/material
         MatSelectModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatProgressSpinnerModule
-    ]
+        MatProgressSpinnerModule,
+        TableComponent
+    ],
+    declarations: [TableComponent]
 })
 export class MaterialModule {
 
