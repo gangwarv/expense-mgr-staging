@@ -2,18 +2,7 @@ import * as ItemActions from '../actions/item.actions';
 import { ItemState } from '../state/item.state';
 
 const defaultState: ItemState = {
-    items: [
-        {
-            id:'1',
-            name: 'Bread',
-            defaultPrice: 30,
-        },
-        {
-            id:'2',
-            name: 'Milk',
-            defaultPrice: 28,
-        }
-    ],
+    items: [],
     loading: false
 }
 export function itemReducer(state: ItemState = defaultState, action: ItemActions.All): ItemState {

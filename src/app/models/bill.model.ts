@@ -10,4 +10,5 @@ export interface Bill{
 
     // Join
     itemName?: string;
+    monthName?: string;
 }

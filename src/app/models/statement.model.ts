@@ -8,4 +8,6 @@ export interface Statement {
     startDate: string;
     endDate: Date;
     processed: boolean;
+
+    name: string;
 }

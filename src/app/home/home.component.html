@@ -1,6 +1,11 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Home</mat-card-title>
+    <mat-card-title
+      >Details -
+      <small
+        ><i>Hello {{ (auth$ | async)?.displayName }}</i></small
+      ></mat-card-title
+    >
   </mat-card-header>
   <mat-card-content fxLayout="column">
     <div
@@ -11,13 +16,16 @@
     >
       <div fxFlex="100%">
         <mat-form-field>
-          <mat-select placeholder="Period" [(ngModel)]="period">
+          <mat-select
+            placeholder="Period"
+            (selectionChange)="onMonthChange($event)"
+          >
             <ng-container *ngIf="statements$ | async as statements">
               <mat-option
                 *ngFor="let statement of statements"
                 [value]="statement.id"
               >
-                {{ statement.id }}
+                {{ statement.name }}
               </mat-option>
             </ng-container>
           </mat-select>
@@ -31,12 +39,37 @@
       fxLayoutAlign="center"
     >
       <div fxFlex="100%">
-        <app-table></app-table>
+        <table>
+          <tr>
+            <th>BillDate</th>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>CreatedAt</th>
+          </tr>
+          <ng-container *ngIf="billItems$ | async as billItems">
+            <tr *ngFor="let bill of billItems">
+              <td>{{ bill.billDate.toDate().toLocaleDateString() }}</td>
+              <td [title]="bill.itemId">{{ bill.itemName }}</td>
+              <td>{{ bill.amount }}</td>
+              <td>{{ bill.quantity }}</td>
+              <td>{{ bill.createdAt.toDate().toLocaleString() }}</td>
+            </tr>
+          </ng-container>
+        </table>
+      </div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="10px"
+      fxLayoutAlign="center"
+    >
+      <div fxFlex="100%">
+        <!-- <app-table></app-table> -->
+        <hr />
         <input type="button" (click)="signIn()" value="Sign In" />
         <input type="button" (click)="signOut()" value="Sign Out" />
-        <pre>
-          {{ auth$ | async | json }}
-        </pre>
       </div>
     </div>
   </mat-card-content>

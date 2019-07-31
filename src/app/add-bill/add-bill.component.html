@@ -9,6 +9,25 @@
       <mat-card-title>Expense Details</mat-card-title>
     </mat-card-header>
     <mat-card-content fxLayout="column">
+        <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="1%"
+        fxLayoutAlign="center"
+      >
+        <div class="grey" fxFlex="100%">
+          <mat-form-field>
+            <mat-select placeholder="Period" formControlName="monthId" [ngModel]="bills.statements[0]?.id">
+                <mat-option *ngFor="let stmt of bills.statements" [value]="stmt.id">
+                  {{ stmt.name }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="billForm.controls['monthId'].hasError('required')">
+              Month is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
       <div
         fxLayout="row"
         fxLayout.xs="column"
@@ -17,9 +36,9 @@
       >
         <div class="grey" fxFlex="50%">
           <mat-form-field>
-            <mat-select placeholder="Item" formControlName="itemId">
+            <mat-select placeholder="Item" formControlName="itemId" (selectionChange)="onItemChange($event)">
               <ng-container *ngIf="items$ | async as items">
-                <mat-option *ngFor="let item of items.items" [value]="item.id">
+                <mat-option se *ngFor="let item of items" [value]="item.id">
                   {{ item.name }}
                 </mat-option>
               </ng-container>
@@ -31,7 +50,7 @@
         </div>
         <div class="red" fxFlex="50%">
           <mat-form-field>
-            <input matInput placeholder="Amount" formControlName="amount" type="number" />
+            <input matInput placeholder="Amount" formControlName="amount" type="number" [ngModel]="selectedItemDefaultAmount" />
             <mat-error *ngIf="billForm.controls['amount'].hasError('required')">
               Amount is <strong>required</strong>
             </mat-error>
@@ -101,10 +120,7 @@
         >
       </button>
       <mat-spinner *ngIf="bills.loading"></mat-spinner>
-      <pre>
-                {{ bills | json }}
-            </pre
-      >
+
     </mat-card-actions>
   </mat-card>
 </form>

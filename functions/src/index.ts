@@ -1,13 +1,18 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
+import { AuthUserCreate } from "./auth.oncreate";
+
 admin.initializeApp();
+
+export const onAuthUserCreate = AuthUserCreate;
 
 export const onBillWrite = functions.firestore
   .document("expenses/{billNo}")
   .onWrite(async (change, context) => {
     const db = admin.firestore();
 
-    const document = change.after.data() || change.before.data() || { monthId: 'abc'};
+    const document = change.after.data() ||
+      change.before.data() || { monthId: "abc" };
 
     const monthId = document.monthId;
     return db
